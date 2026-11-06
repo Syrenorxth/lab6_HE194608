@@ -16,6 +16,8 @@ export default function Login() {
       (a) => a.email === email && a.password === password
     );
 
+    if (!user) return;
+
     if (user.status === "Inactive") {
       setErrorMsg("Tài khoản đã bị khóa");
       return;

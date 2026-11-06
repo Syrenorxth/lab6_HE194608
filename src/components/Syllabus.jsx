@@ -21,6 +21,13 @@ export default function Syllabus() {
     setFilteredSubjects(res.data);
   };
 
+  const handleSearch = () => {
+    const result = subjects.filter((p) =>
+      p[searchBy].toLowerCase().includes(searchKey.toLowerCase())
+    );
+    setFilteredSubjects(result);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -70,13 +77,13 @@ export default function Syllabus() {
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={handleSearch}>
               Search
             </button>
           </div>
         </div>
 
-        <table className="table table-bordered">
+        <table className="table">
           <thead>
             <tr>
               <th>Code</th>
@@ -96,7 +103,7 @@ export default function Syllabus() {
                 <td>{p.curriculum}</td>
                 <td>{p.semester}</td>
                 <td>{p.credits}</td>
-                <td>{p.preRequisites.join(", ")}</td>
+                <td>{p.preRequisites}</td>
                 <td>{p.description}</td>
               </tr>
             ))}
